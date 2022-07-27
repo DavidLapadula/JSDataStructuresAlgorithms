@@ -1,6 +1,6 @@
 /**Good Code */
 
-// Readable, Scalable (Big O measures this), Predictable
+// Readable, Scalable (Big O for speed, and memory)
 // JS has performance.now() to measure how many ms things take
 // Need to determine what happens when input grows; the slower it slows down, the better
 // Calculate operations performed to abstract performance analysis from machine
@@ -31,4 +31,32 @@ function logAllPairs(array) {
     }
 }
 
-/**Big-O Cheatsheet */
+/**O(n!) */
+// Nested loop for EVERY element in the input
+
+/**Pillars of Programming */
+// Readable
+// Memory: more memory, less speed
+// Speed: more speed, less memory
+
+/**Space Complexity */
+// Measure of how much memory is being allocated
+// Heap: where variables are stored
+// Stack: where functions are stored
+
+// DO NOT care about size of input, only the space allocated/added by the function
+function spaceTest(input) {
+    for (let i = 0; i < input.length; i++) {
+        console.log(i);
+    }
+}
+
+function spaceTest2(input) {
+    let testArray = [];
+
+    for (let i = 0; i < input.length; i++) {
+        testArray[i] = 'test'; // make array size of input so space complexity is O(n n)
+    }
+
+    return testArray;
+}
