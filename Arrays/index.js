@@ -106,13 +106,12 @@ function mergeSortedArrays(array1, array2) {
         return array1;
     }
 
+    // i,j always one index ahead of item in array's being tracked
     while (array1Item || array2Item) {
         if (!array2Item || array1Item < array2Item) {
             mergedArray.push(array1Item);
-            console.log(array1Item);
             array1Item = array1[i];
             i++;
-            console.log(array1Item);
         } else {
             mergedArray.push(array2Item);
             array2Item = array2[j];
