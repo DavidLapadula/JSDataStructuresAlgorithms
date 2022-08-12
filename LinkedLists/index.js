@@ -22,6 +22,7 @@ class Node {
     constructor(value) {
         this.value = value;
         this.next = null;
+        this.previous = null;
     }
 }
 
@@ -102,6 +103,26 @@ class LinkedList {
         leader.next = deleteNode.next;
         this.length--;
     }
+
+    reverse() {
+        if (!this.head.next) {
+            return;
+        }
+
+        this.tail = this.head; 
+        let first = this.head; 
+        let second = this.head.next;
+
+        while (second) {
+            const temp = second.next;
+            second.next = first;
+            first = second;
+            second = temp;
+        }
+
+        this.head.next = null;
+        this.head = first;
+    }
 }
 
 const myLinkedList = new LinkedList(10);
@@ -109,12 +130,13 @@ myLinkedList.append(5);
 myLinkedList.append(6);
 myLinkedList.prepend(20);
 myLinkedList.insert(2, 105);
-myLinkedList.printList();
+// myLinkedList.printList();
 
 /**Doubly LL */
 
 // Allow traversing list in reverse order because additional pointer to previous
 // Lookup could be O(n / 2) because knowing which half the index is in and can start on either end
+// Easier to delete previous node because you have a reference to it
 // Downside is more memory
 
 class DoublyLinkedList {
@@ -148,7 +170,8 @@ class DoublyLinkedList {
 
     append(value) {
         const newNode = new Node(value);
-        this.tail.next = newNode; // when its the first item, this.tail POINTS TO this.head
+        newNode.previous = this.tail; // before tail gets changed to be the new ndoe
+        this.tail.next = newNode;
         this.tail = newNode;
         this.length++;
         return this;
@@ -157,6 +180,7 @@ class DoublyLinkedList {
     prepend(value) {
         const newNode = new Node(value);
         newNode.next = this.head;
+        this.head.previous = newNode; 
         this.head = newNode;
         this.length++;
         return this;
@@ -173,10 +197,12 @@ class DoublyLinkedList {
 
         const newNode = new Node(value);
         const leader = this.traverseToIndex(index - 1); // get the item before the place you want to insert
-        const holdingPoint = leader.next;
+        const follower = leader.next;
 
         leader.next = newNode;
-        newNode.next = holdingPoint;
+        newNode.previous = leader;
+        newNode.next = follower;
+        follower.previous = newNode;
     }
 
     delete(index) {
@@ -192,6 +218,7 @@ class DoublyLinkedList {
         const deleteNode = leader.next;
 
         leader.next = deleteNode.next;
+        deleteNode.next.previous = leader;
         this.length--;
     }
 }
