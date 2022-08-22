@@ -195,3 +195,22 @@ const tree = new BinarySearchTree();
 // 1 extra bit per node needed for the color
 
 /**Binary Heap */
+// Different from Memory Heap, which is storage
+// Min/Max heap: descending/ascending values
+// Used when priority is required
+// Lookup is O(n) because NO ORDER to left or right, need to check all child nodes
+// Good for comparison because can easily tell greater than or less than
+// Add values from left to right by finding the next element with < 2 children, which keeps levels balances, changes bubble up through switching if necessary to maintain MAX/MIN
+// Low memory and do not need to be rebalanced
+
+/** Priority Queue */
+// Queue but each element have priority, so some can skip ahead
+// Searching slower than BST, but inserts MOSTLY fast unless need to bubble up changes
+// MAX/MIN are O(1) because its the top item
+
+/**Trie */
+
+// Used for seaching text. See if part of word exists in a text
+// Auto completion: tree is created out of possible words for each child node
+// O(length of word): just find letter starts with (O(1) because is direct child) and then check length of that sub node against length of word
+// Memory saved because of prefixes. The 'N' from 'not' and 'news' is shared
