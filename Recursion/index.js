@@ -57,3 +57,24 @@ function findFibonacciIterative(n) {
 
 console.log(findFibonacciRecursive(10));
 console.log(findFibonacciIterative(10));
+
+/**Recursion vs. Iteration  and when to use*/
+
+// Recursion is DRY but larger memory footprint by putting lots of functions on the callstack
+// Recursion good to use with unknown depth of data structure - like trees or file structure traversal
+    // Problem can be divided into subproblems
+    // All subproblems are the same
+    // Solutions to subproblem can be added to solve the overall problem
+// Tail Call optimization: avoid additional function calls on the stack
+
+
+function reverseStringRecursive (str) {
+    console.log(str);
+    if (str === "") {
+      return "";
+    } else {
+      return reverseStringRecursive(str.substr(1)) + str.charAt(0); // pull first letter and add first letter to end
+    }
+  }
+  
+  console.log(reverseStringRecursive('yoyo master'));
