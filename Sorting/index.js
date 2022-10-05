@@ -1,6 +1,7 @@
 /**Intro */
 
 // Very important for large data sets
+// Sort is stable if values that have the same sort key stay in the same order after sorting. Important because can then stack sorts by multiple values
 
 
 /**Issues with sort() */
@@ -112,39 +113,40 @@ function insertionSort(array) {
 /** Merge Sort */
 
 // O (n log n), used divide and conquer technique
+// Still n because need to check every item, and then log n becaus recursively working through tree
 
 const numbersForMerge = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-function mergeSort (array) {
-    if (array.length === 1) {
-      return array
+function mergeSort(array) {
+    const length = array.length;
+
+    if (length === 1) {
+        return array
     }
     // Split Array in into right and left
-    const length = array.length;
     const middle = Math.floor(length / 2)
-    const left = array.slice(0, middle) 
+    const left = array.slice(0, middle)
     const right = array.slice(middle)
-  
-    return merge(
-      mergeSort(left),
-      mergeSort(right)
-    )
-  }
 
-  function merge(left, right){
+    return merge(
+        mergeSort(left),
+        mergeSort(right)
+    );
+}
+
+function merge(left, right) {
     const result = [];
     let leftIndex = 0;
     let rightIndex = 0;
-    while(leftIndex < left.length && 
-          rightIndex < right.length){
-       if(left[leftIndex] < right[rightIndex]){
-         result.push(left[leftIndex]);
-         leftIndex++;
-       } else{
-         result.push(right[rightIndex]);
-         rightIndex++
-      }
-    }  
-    // console.log(left, right)
+    while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        } else {
+            result.push(right[rightIndex]);
+            rightIndex++
+        }
+    }
+    
     return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
-  }
+}
