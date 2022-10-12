@@ -150,3 +150,51 @@ function merge(left, right) {
     
     return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
+
+
+/** Quick Sort */
+
+// Divide and conquer, so log n
+// Pick pivot and put all numbers smaller to its left and larger to its right
+// Continue this for either side of the list
+// Worst case caan be quadratic if pick a bad pivot and need to go over the whole list. Fastest ON AVG
+// But space complexity is much better at log n
+
+const numbersForQuick = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+// left and right should be first and last index so can pick the pivot. First less than last then does not need to be swapped
+function quickSort(array, left, right){
+    const len = array.length; 
+    let pivot;
+    let partitionIndex;
+  
+    if(left < right) {
+      pivot = right;
+      partitionIndex = partition(array, pivot, left, right);
+      
+      //sort left and right
+      quickSort(array, left, partitionIndex - 1);
+      quickSort(array, partitionIndex + 1, right);
+    }
+    return array;
+  }
+     
+  function partition(array, pivot, left, right){
+    let pivotValue = array[pivot];
+    let partitionIndex = left;
+  
+    for(let i = left; i < right; i++) {
+      if(array[i] < pivotValue){
+        swap(array, i, partitionIndex);
+        partitionIndex++;
+      }
+    }
+    swap(array, right, partitionIndex);
+    return partitionIndex;
+  }
+  
+  function swap(array, firstIndex, secondIndex){
+      var temp = array[firstIndex];
+      array[firstIndex] = array[secondIndex];
+      array[secondIndex] = temp;
+  }
