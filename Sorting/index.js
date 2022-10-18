@@ -114,6 +114,7 @@ function insertionSort(array) {
 
 // O (n log n), used divide and conquer technique
 // Still n because need to check every item, and then log n becaus recursively working through tree
+// Best, AVG, and worst case are (n log(n)) so very effective BUT tradeoff because O(n) space
 
 const numbersForMerge = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
@@ -179,7 +180,7 @@ function quickSort(array, left, right){
     return array;
   }
      
-  function partition(array, pivot, left, right){
+function partition(array, pivot, left, right){
     let pivotValue = array[pivot];
     let partitionIndex = left;
   
@@ -191,10 +192,20 @@ function quickSort(array, left, right){
     }
     swap(array, right, partitionIndex);
     return partitionIndex;
-  }
+}
   
-  function swap(array, firstIndex, secondIndex){
+function swap(array, firstIndex, secondIndex){
       var temp = array[firstIndex];
       array[firstIndex] = array[secondIndex];
       array[secondIndex] = temp;
-  }
+}
+
+/**Non comparison sorts */
+
+// Comparison requires (n log(n)) as best time, so if do not compare
+// Non-comparison sorts use how nunbers are stored in binary. ONLY works with integers
+
+
+
+
+
