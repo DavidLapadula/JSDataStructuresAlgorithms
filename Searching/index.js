@@ -19,9 +19,56 @@
 /** BFS */
 
 // Go horizontally across tree
-// Uses more memory because tracks nodes already visited and children 
+// Uses more memory because needs references tto children of nodes visited at children
 // Shortest path between nodes because searches closest first
-// Good to use if know that node is in top of tree
+// Good to use if know that node is in top of tree. Nodes searched first are closest to root
+// Implemented with a queue
+
+function breadthFirstSearch(items) {
+     let currentNode = items.root; 
+     let list = []; 
+     let queue = []; // keep track of level to access children, can hurt memory because need to always add to it
+
+     queue.push(currentNode); 
+
+     while(queue.length > 0) {
+
+        // Will grab the first item in list, and because set in breadth first fashion, will MOVE it from queue to list
+        currentNode = queue.shift();
+        list.push(currentNode.value); 
+
+        // this pushes items into queue in breadth first fashion, looking at left then right child of current node
+        if (currentNode.left) {
+            queue.push(currentNode.left);
+        }
+
+        if (currentNode.right) {
+            queue.push(currentNode.right);
+        }
+     }
+
+     return list;
+}
+
+function breadthFirstSearchRecursive(items, queue, list) {
+    if (queue.length === 0) {
+      return list;  
+    }
+
+    let currentNode = queue.shift(); 
+    list.push(currentNode.value)
+
+    if (currentNode.left) {
+        queue.push(currentNode.left);
+    }
+
+    if (currentNode.right) {
+        queue.push(currentNode.right);
+    }
+
+    return breadthFirstSearchRecursive(items, queue, list);
+
+}
 
 /** DFS */
 
