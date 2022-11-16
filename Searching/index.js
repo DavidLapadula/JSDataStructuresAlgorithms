@@ -19,10 +19,11 @@
 /** BFS */
 
 // Go horizontally across tree
-// Uses more memory because needs references tto children of nodes visited at children
+// Uses more memory because needs references to children of nodes visited at children
 // Shortest path between nodes because searches closest first
 // Good to use if know that node is in top of tree. Nodes searched first are closest to root
 // Implemented with a queue
+// Used to validate a BST
 
 function breadthFirstSearch(items) {
      let currentNode = items.root; 
@@ -73,6 +74,57 @@ function breadthFirstSearchRecursive(items, queue, list) {
 /** DFS */
 
 // Search follows branch all the way down, and then goes to nearest ancestor with unexplored child
-// Less memory because do not need to store pointer to children
-// Good for checking if path exists because always exploreing children
+// Less memory because do not need to store children of nodes visited
+// Good for checking if path exists because always exploring children
 // Useful when node looking for might be at the bottom
+// In-order: return order they appear from left to right
+// Post-order: return left side first, then right side where children come before parent
+// Pre-order: return order level by level, explore all the way left then go to next highest node
+    // Useful for recreating tree
+
+
+// If binary tree, then will be sorted highest to lowest
+function depthFirstSearchInOrder(node, list) {
+    // traverse all the way to the left, then push value
+    if (node.left) {
+        depthFirstSearchInOrder(node.left, list);
+    }
+    
+    list.push(node.value);
+
+    if (node.right) {
+        depthFirstSearchInOrder(node.right, list);
+    }
+
+    return list;
+}
+
+function depthFirstSearchPostOrder(node, list) {
+    // traverse all the way to right and left, then push value 
+    if (node.left) {
+        depthFirstSearchInOrder(node.left, list);
+    }
+
+    if (node.right) {
+        depthFirstSearchInOrder(node.right, list);
+    }
+
+    list.push(node.value);
+
+    return list;
+}
+
+function depthFirstSearchPreOrder(node, list) {
+    list.push(node.value);
+    
+    if (node.left) {
+        depthFirstSearchInOrder(node.left, list);
+    }
+
+    if (node.right) {
+        depthFirstSearchInOrder(node.right, list);
+    }
+
+    return list;
+}
+
