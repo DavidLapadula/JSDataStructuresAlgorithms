@@ -1,5 +1,5 @@
 # JSDataStructuresAlgorithms
-Course covering Data Structures and Algorithms in JavaScript
+Course covering Data Structures and Algorithms in JavaScript. 
 
 ## Topics Included
 
